@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>{{ product.name }} | CodeAlpha Store</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#0f172a;
+    font-family:'Poppins',sans-serif;
+}
+
+/* NAVBAR */
+
+nav{
+    background:#111827;
+    border-bottom:1px solid #374151;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 70px;
+}
+
+nav h2{
+    font-size:32px;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:35px;
+}
+
+nav ul li a{
+    color:white;
+    text-decoration:none;
+    font-size:18px;
+}
+
+nav ul li a:hover{
+    color:#f59e0b;
+}
+
+/* PRODUCT */
+
+.container{
+    width:90%;
+    max-width:1300px;
+    margin:60px auto;
+    background:#1e293b;
+    border-radius:22px;
+    padding:45px;
+    display:flex;
+    gap:60px;
+    align-items:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.45);
+}
+
+.product-box{
+    background:#111827;
+    border:1px solid #374151;
+    border-radius:18px;
+    box-shadow:0 20px 40px rgba(0,0,0,.45);
+    display:flex;
+    gap:60px;
+    padding:40px;
+}
+
+.product-image{
+    flex:1;
+}
+
+.product-image img{
+    width:100%;
+    border-radius:18px;
+    transition:.4s;
+}
+.product-image img:hover{
+    transform:scale(1.04);
+}
+.product-details{
+    flex:1;
+}
+
+.product-details h1{
+    color:white;
+    font-size:52px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+.rating{
+    color:#f59e0b;
+    font-size:24px;
+    margin-bottom:20px;
+}
+
+.price{
+    color:#22c55e;
+    font-size:46px;
+    font-weight:bold;
+    margin:25px 0;
+}
+
+.description{
+    color:#cbd5e1;
+    line-height:32px;
+    margin-bottom:35px;
+    font-size:18px;
+}
+
+.btn{
+    display:inline-block;
+    background:linear-gradient(135deg,#f59e0b,#ea580c);
+    color:white;
+    padding:16px 40px;
+    text-decoration:none;
+    border-radius:12px;
+    font-size:18px;
+    transition:.35s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(245,158,11,.4);
+}
+
+.back-btn{
+    background:#374151;
+}
+
+.back-btn:hover{
+    background:#4b5563;
+}
+
+.back-btn:hover{
+    background:#1d4ed8;
+}
+
+.features{
+    margin-top:35px;
+}
+
+.features p{
+    color:#e5e7eb;
+    margin:15px 0;
+    font-size:18px;
+}
+
+footer{
+    margin-top:70px;
+    background:#111827;
+    border-top:1px solid #374151;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+@media(max-width:900px){
+
+.product-box{
+    flex-direction:column;
+}
+
+nav{
+    flex-direction:column;
+    gap:15px;
+}
+
+nav ul{
+    gap:18px;
+}
+
+.product-details h1{
+    font-size:34px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<h2>CodeAlpha Store</h2>
+
+<ul>
+
+<li><a href="/">Home</a></li>
+
+<li><a href="/products/">Products</a></li>
+
+<li><a href="/cart/">🛒 Cart ({{ cart_count }})</a></li>
+
+</ul>
+
+</nav>
+
+<div class="container">
+
+<div class="product-box">
+
+<div class="product-image">
+
+<img src="{{ product.image }}" alt="{{ product.name }}">
+
+</div>
+
+<div class="product-details">
+
+<h1>{{ product.name }}</h1>
+
+<div class="rating">
+⭐⭐⭐⭐⭐ (4.8)
+</div>
+
+<div class="price">
+₹{{ product.price }}
+</div>
+
+<p class="description">
+{{ product.description }}
+</p>
+
+<div class="features">
+
+<p>✅ 100% Genuine Product</p>
+
+<p>🚚 Free Delivery Across India</p>
+
+<p>🔄 7 Days Easy Replacement</p>
+
+<p>🔒 Secure Payment</p>
+
+</div>
+
+<br>
+
+<a href="{% url 'add_to_cart' product.id %}" class="btn">
+🛒 Add to Cart
+</a>
+
+<a href="/products/" class="btn back-btn">
+⬅ Back
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+<h3>© 2026 CodeAlpha Store | Built with Django ❤️</h3>
+
+</footer>
+
+</body>
+</html>

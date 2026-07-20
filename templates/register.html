@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Register | CodeAlpha Store</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:#0f172a;
+
+overflow:hidden;
+
+}
+
+.background{
+
+position:absolute;
+width:100%;
+height:100%;
+
+}
+
+.circle{
+
+position:absolute;
+border-radius:50%;
+background:rgba(255,255,255,.08);
+animation:float 8s infinite ease-in-out;
+
+}
+
+.circle:nth-child(1){
+
+width:220px;
+height:220px;
+left:8%;
+top:12%;
+
+}
+
+.circle:nth-child(2){
+
+width:170px;
+height:170px;
+right:10%;
+top:15%;
+
+animation-delay:2s;
+
+}
+
+.circle:nth-child(3){
+
+width:280px;
+height:280px;
+left:35%;
+bottom:-80px;
+
+animation-delay:4s;
+
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-30px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+.card{
+
+position:relative;
+
+width:430px;
+
+background:#1e293b;
+
+padding:45px;
+
+border-radius:20px;
+
+border:1px solid #334155;
+
+box-shadow:0 20px 45px rgba(0,0,0,.55);
+
+animation:fade .7s;
+
+}
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+
+.card h1{
+
+color:white;
+text-align:center;
+font-size:38px;
+margin-bottom:10px;
+
+}
+
+.subtitle{
+
+text-align:center;
+color:#94a3b8;
+margin-bottom:30px;
+
+}
+
+.input-box{
+
+margin-bottom:18px;
+
+}
+
+.input-box label{
+
+display:block;
+margin-bottom:8px;
+font-weight:600;
+color:white;
+
+}
+
+.input-box input{
+
+width:100%;
+padding:14px;
+background:#334155;
+color:white;
+border:1px solid #475569;
+border-radius:10px;
+font-size:16px;
+outline:none;
+
+}
+
+.input-box input::placeholder{
+
+color:#94a3b8;
+
+}
+
+.input-box input:focus{
+
+border:1px solid #f59e0b;
+
+}
+.btn{
+
+width:100%;
+padding:15px;
+background:#f59e0b;
+color:white;
+border:none;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+transition:.3s;
+margin-top:10px;
+
+}
+
+.btn:hover{
+
+background:#d97706;
+
+}
+
+.bottom{
+
+margin-top:22px;
+text-align:center;
+color:#cbd5e1;
+
+}
+
+.bottom a{
+
+color:#f59e0b;
+font-weight:600;
+text-decoration:none;
+
+}
+
+.bottom a:hover{
+
+text-decoration:underline;
+
+}
+.message{
+
+padding:12px;
+
+border-radius:8px;
+
+margin-bottom:18px;
+
+font-weight:500;
+
+}
+
+.success{
+
+background:#d1fae5;
+color:#065f46;
+
+}
+
+.error{
+
+background:#fee2e2;
+color:#991b1b;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="background">
+
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+
+</div>
+
+<div class="card">
+
+<h1>Create Account</h1>
+
+<p class="subtitle">
+Join CodeAlpha Store
+</p>
+
+{% if messages %}
+
+{% for message in messages %}
+
+<div class="message {% if message.tags == 'success' %}success{% else %}error{% endif %}">
+
+{{ message }}
+
+</div>
+
+{% endfor %}
+
+{% endif %}
+
+<form method="POST">
+
+{% csrf_token %}
+
+<div class="input-box">
+
+<label>👤 Username</label>
+
+<input
+type="text"
+name="username"
+placeholder="Enter Username"
+required>
+
+</div>
+
+<div class="input-box">
+
+<label>📧 Email</label>
+
+<input
+type="email"
+name="email"
+placeholder="Enter Email"
+required>
+
+</div>
+
+<div class="input-box">
+
+<label>🔒 Password</label>
+
+<input
+type="password"
+name="password"
+placeholder="Enter Password"
+required>
+
+</div>
+
+<div class="input-box">
+
+<label>🔒 Confirm Password</label>
+
+<input
+type="password"
+name="confirm_password"
+placeholder="Confirm Password"
+required>
+
+</div>
+
+<button class="btn">
+
+Create Account
+
+</button>
+
+</form>
+
+<div class="bottom">
+
+Already have an account?
+
+<a href="{% url 'login' %}">
+
+Login
+
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

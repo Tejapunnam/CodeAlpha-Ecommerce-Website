@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Products | CodeAlpha Store</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#0F172A;
+    color:white;
+}
+/* NAVBAR */
+
+/* ================= NAVBAR ================= */
+
+nav{
+    background:#111827;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 70px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    border-bottom:1px solid #2d3748;
+}
+
+.logo a{
+    text-decoration:none;
+    font-size:38px;
+    font-weight:700;
+    color:#5B5FEF;
+    white-space:nowrap;
+}
+
+nav ul{
+    display:flex;
+    align-items:center;
+    gap:35px;
+
+    list-style:none;
+}
+
+nav ul li a{
+    text-decoration:none;
+    color:#374151;
+
+    font-size:18px;
+    font-weight:600;
+
+    transition:.3s;
+}
+
+nav ul li a:hover{
+    color:#f59e0b;
+}
+
+.username{
+    background:#fff7ed;
+    color:#f59e0b;
+    padding:8px 16px;
+    border-radius:30px;
+    font-weight:600;
+}
+
+/* HEADING */
+
+.container{
+    width:92%;
+    margin:auto;
+    padding:60px 0;
+    color:white;
+}
+
+.container h1{
+    text-align:center;
+    font-size:42px;
+    margin-bottom:15px;
+    color:white;
+}
+
+.subtitle{
+    text-align:center;
+    color:#cbd5e1;
+    margin-bottom:50px;
+}
+
+/* PRODUCTS */
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:35px;
+}
+
+.card{
+    background:#1e293b;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 15px 30px rgba(0,0,0,.08);
+    transition:.35s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 25px 45px rgba(0,0,0,.18);
+}
+
+.card img{
+    width:100%;
+    height:280px;
+    object-fit:cover;
+}
+
+.content{
+    padding:22px;
+}
+
+.card h2{
+    font-size:25px;
+font-weight:700;
+    color:white;
+    margin-bottom:10px;
+}
+
+.rating{
+    color:#f59e0b;
+    margin-bottom:15px;
+    font-size:18px;
+}
+
+.description{
+    color:#cbd5e1;
+    line-height:26px;
+    margin-bottom:18px;
+    min-height:70px;
+}
+
+.price{
+    color:#16a34a;
+    font-size:28px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+button{
+
+    width:100%;
+    padding:15px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#6366f1;
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+button:hover{
+    background:#4f46e5;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(91,95,239,.3);
+}
+footer{
+    margin-top:80px;
+    background:#1f2937;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+nav{
+    flex-direction:column;
+    padding:20px;
+}
+
+nav ul{
+    margin-top:20px;
+    gap:20px;
+}
+
+.container h1{
+    font-size:34px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+
+<nav>
+
+    <div class="logo">
+        <a href="/">CodeAlpha Store</a>
+    </div>
+
+    <ul>
+
+        <li><a href="/">Home</a></li>
+
+        <li><a href="/products/">Products</a></li>
+
+        <li>
+            <a href="/cart/">
+                🛒 Cart ({{ cart_count }})
+            </a>
+        </li>
+
+        <li><a href="#">Contact</a></li>
+
+        {% if user.is_authenticated %}
+
+            <li class="username">
+                👋 {{ user.username }}
+            </li>
+
+            <li>
+                <a href="/logout/">Logout</a>
+            </li>
+
+        {% else %}
+
+            <li>
+                <a href="/login/">Login</a>
+            </li>
+
+        {% endif %}
+
+    </ul>
+
+</nav>
+{% if messages %}
+
+<div style="width:90%;margin:25px auto;">
+
+    {% for message in messages %}
+
+    <div style="
+        background:#d1fae5;
+        color:#065f46;
+        padding:15px;
+        border-radius:8px;
+        margin-bottom:15px;
+        font-size:17px;
+        font-weight:500;
+    ">
+        ✅ {{ message }}
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endif %}
+
+<div class="container">
+
+<h1>Our Products</h1>
+
+<p class="subtitle">
+Explore our premium collection of electronics and accessories.
+</p>
+
+<form method="GET" style="text-align:center; margin-bottom:40px;">
+
+    <input
+        type="text"
+        name="q"
+        placeholder="🔍 Search Products..."
+        value="{{ query }}"
+        style="width:350px;
+               padding:12px;
+               border:1px solid #ccc;
+               border-radius:8px;
+               font-size:16px;">
+
+    <button
+        type="submit"
+        style="width:auto;
+               padding:12px 25px;
+               margin-left:10px;
+               background:#2563eb;
+               color:white;
+               border:none;
+               border-radius:8px;
+               cursor:pointer;">
+        Search
+    </button>
+
+</form>
+<div class="products">
+
+{% for product in products %}
+
+<div class="card">
+
+<a href="{% url 'product_detail' product.id %}">
+    <img src="{{ product.image }}" alt="{{ product.name }}">
+</a>
+
+<div class="content">
+
+<h2>
+    <a href="{% url 'product_detail' product.id %}"
+       style="text-decoration:none;color:#1f2937;">
+        {{ product.name }}
+    </a>
+</h2>
+
+<div class="rating">
+⭐⭐⭐⭐⭐
+</div>
+
+<p class="description">
+{{ product.description }}
+</p>
+
+<p class="price">
+₹{{ product.price }}
+</p>
+
+<a href="{% url 'add_to_cart' product.id %}">
+<button>
+🛒 Add to Cart
+</button>
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+<footer>
+
+<h3>© 2026 CodeAlpha Store | Built with Django ❤️</h3>
+
+</footer>
+
+</body>
+<script>
+setTimeout(function () {
+    const alerts = document.querySelectorAll("div[style*='background:#d1fae5']");
+    alerts.forEach(function(alert){
+        alert.style.transition = "opacity 0.6s";
+        alert.style.opacity = "0";
+
+        setTimeout(function(){
+            alert.remove();
+        },600);
+    });
+},3000);
+</script>
+</html>

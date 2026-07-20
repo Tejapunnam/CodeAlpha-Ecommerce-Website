@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeAlpha Store</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+    background:#0f172a;
+    color:white;
+}
+
+        nav{
+    background:#111827;
+    padding:22px 80px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 5px 25px rgba(0,0,0,.45);
+}
+
+        nav h2{
+    color:white;
+    font-size:48px;
+}
+
+        nav ul{
+            list-style:none;
+            display:flex;
+            gap:35px;
+        }
+
+        nav ul li a{
+    color:white;
+    font-size:20px;
+    transition:.3s;
+}
+nav ul li a:hover{
+    color:#f59e0b;
+}
+        .hero{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:100px 90px;
+    min-height:88vh;
+}
+        .hero-text{
+            width:50%;
+        }
+
+        .hero-text h1{
+    font-size:72px;
+    line-height:90px;
+    color:white;
+}
+
+        .hero-text p{
+    color:#cbd5e1;
+    font-size:24px;
+    line-height:42px;
+}
+
+.btn{
+    background:#f59e0b;
+    color:white;
+    padding:18px 45px;
+    border-radius:12px;
+    text-decoration:none;
+    font-size:22px;
+    transition:.3s;
+}
+.btn:hover{
+    background:#d97706;
+    transform:translateY(-5px);
+}
+.hero-image img{
+    width:600px;
+    border-radius:22px;
+    transition:.4s;
+    box-shadow:0 25px 45px rgba(0,0,0,.15);
+}
+.hero-image img:hover{
+    transform:scale(1.04);
+}
+        .features{
+            display:flex;
+            justify-content:center;
+            gap:30px;
+            padding:40px 80px 80px;
+            flex-wrap:wrap;
+        }
+
+       .feature-card{
+    background:#1e293b;
+    color:white;
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+.feature-card:hover{
+    transform:translateY(-12px);
+}
+
+        .feature-card h3{
+    color:white;
+}
+
+        .feature-card p{
+    color:#cbd5e1;
+}
+footer{
+    background:#111827;
+    color:white;
+}
+        @media(max-width:900px){
+
+            nav{
+                padding:20px;
+                flex-direction:column;
+            }
+
+            nav ul{
+                margin-top:20px;
+                gap:20px;
+            }
+
+            .hero{
+                flex-direction:column;
+                text-align:center;
+                padding:50px 20px;
+            }
+
+            .hero-text{
+                width:100%;
+            }
+
+            .hero-text h1{
+                font-size:42px;
+            }
+
+            .hero-image img{
+                width:100%;
+                max-width:420px;
+                margin-top:40px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav>
+
+        <h2>CodeAlpha Store</h2>
+
+        <ul>
+
+    <li><a href="/">Home</a></li>
+
+    <li><a href="/products/">Products</a></li>
+
+    <li>
+        <a href="/cart/">
+            🛒 Cart ({{ cart_count }})
+        </a>
+    </li>
+
+    <li><a href="#">Contact</a></li>
+
+    {% if user.is_authenticated %}
+
+        <li>
+            <a href="#" style="color:#facc15;">
+                👋 {{ user.username }}
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'logout' %}">
+                Logout
+            </a>
+        </li>
+
+    {% else %}
+
+        <li>
+            <a href="{% url 'login' %}">
+                Login
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'register' %}">
+                Register
+            </a>
+        </li>
+
+    {% endif %}
+
+</ul>
+
+    </nav>
+
+    <section class="hero">
+
+        <div class="hero-text">
+
+            <h1>Shop Smarter.<br>Live Better.</h1>
+
+            <p>
+                Discover premium laptops, smartphones, accessories,
+                electronics and much more at unbeatable prices.
+            </p>
+
+            <a href="/products/" class="btn">
+                Shop Now
+            </a>
+
+        </div>
+
+        <div class="hero-image">
+
+            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=900" alt="Shopping">
+
+        </div>
+
+    </section>
+
+    <section class="features">
+
+        <div class="feature-card">
+            <h3>🚚 Fast Delivery</h3>
+            <p>Quick and reliable delivery across India.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>💳 Secure Payment</h3>
+            <p>100% secure checkout experience.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>⭐ Premium Quality</h3>
+            <p>Only genuine and high-quality products.</p>
+        </div>
+
+    </section>
+
+    <footer>
+
+        <p>© 2026 CodeAlpha Store | Built with Django ❤️</p>
+
+    </footer>
+
+</body>
+</html>
