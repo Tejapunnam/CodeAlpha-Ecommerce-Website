@@ -25,8 +25,11 @@ SECRET_KEY = 'django-insecure-o3iw!59&3o16(_@z@3*s!rdwo4=x2aj-m!_$zmzap0331ii!z$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    "codealpha-ecommerce-website-xrha.onrender.com",
+    "127.0.0.1",
+    "localhost",
+]
 
 # Application definition
 
